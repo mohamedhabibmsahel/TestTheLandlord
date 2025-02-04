@@ -9,8 +9,10 @@ class CustomButtonIcon extends StatelessWidget {
   final double width;
   final double height;
   final bool isSelected;
+  final Icon? icon; // Optional icon parameter
 
-  const CustomButtonIcon({super.key,
+  const CustomButtonIcon({
+    super.key,
     required this.backgroundColor,
     required this.titleColor,
     this.title = "",
@@ -19,6 +21,7 @@ class CustomButtonIcon extends StatelessWidget {
     this.width = 120,
     this.height = 80,
     this.isSelected = false,
+    this.icon, // Initialize icon
   });
 
   @override
@@ -35,19 +38,22 @@ class CustomButtonIcon extends StatelessWidget {
           ),
         ),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: icon != null
+              ? MainAxisAlignment.center
+              : MainAxisAlignment.spaceBetween,
           children: [
-            Row(
-              children: [
-                const SizedBox(width: 8.0), // Adjust the spacing between icon and text
-                Text(
-                  title,
-                  style: TextStyle(
-                    color: titleColor,
-                  ),
+            // Show the icon and text in the center if icon exists, otherwise space between
+            if (icon != null) icon!,
+            if (icon != null)
+              const SizedBox(width: 8.0), // Space between icon and text
+            if (icon == null) ...[
+              Text(
+                title,
+                style: TextStyle(
+                  color: titleColor,
                 ),
-              ],
-            ),
+              ),
+            ],
             if (isSelected)
               Container(
                 width: 30.0,

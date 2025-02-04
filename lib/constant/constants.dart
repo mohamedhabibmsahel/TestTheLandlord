@@ -2,8 +2,8 @@
 
 class AppConstants {
   //Login Screen
-  static const String appTitle = "Se connecter.";
-  static const String noAccount = "Pas de compte?";
+  static const String name = "Hello Alex";
+  static const String goodMorning = "Good Morning!";
   static const String appSubtitle = "Accéder à votre compte";
   static const String imagePath = 'assets/images/pizza.png';
   static const String emailHintText = 'exemple@exemple.fr';

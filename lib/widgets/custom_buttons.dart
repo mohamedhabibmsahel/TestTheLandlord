@@ -10,7 +10,8 @@ class CustomButton extends StatelessWidget {
   final double height;
   final IconData? icon;
 
-  const CustomButton({super.key,
+  const CustomButton({
+    super.key,
     required this.backgroundColor,
     required this.titleColor,
     this.title = "",
@@ -35,18 +36,20 @@ class CustomButton extends StatelessWidget {
           ),
         ),
         child: icon != null
-            ? Icon(
-          icon,
-          color: titleColor,
-          size: 24.0,
-          semanticLabel: title,
-        )
+            ? Center(
+                child: Icon(
+                  icon,
+                  color: titleColor,
+                  size: 24.0,
+                  semanticLabel: title,
+                ),
+              )
             : Text(
-          title,
-          style: TextStyle(
-            color: titleColor,
-          ),
-        ),
+                title,
+                style: TextStyle(
+                  color: titleColor,
+                ),
+              ),
       ),
     );
   }

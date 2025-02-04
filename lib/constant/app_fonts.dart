@@ -42,8 +42,14 @@ class AppFonts {
     fontWeight: FontWeight.w400,
   );
   static TextStyle x20Bold = const TextStyle(
-    color: kWhite,
+    color: kBlackColor,
     fontSize: 20,
+    fontFamily: 'SF Pro Rounded',
+    fontWeight: FontWeight.w700,
+  );
+  static TextStyle x16Bold = const TextStyle(
+    color: kBlackColor,
+    fontSize: 16,
     fontFamily: 'SF Pro Rounded',
     fontWeight: FontWeight.w700,
   );
