@@ -5,6 +5,7 @@ import 'package:test_app/constant/app_fonts.dart';
 import 'package:test_app/constant/constants.dart';
 import 'package:test_app/home_controller.dart';
 import 'package:test_app/widgets/custom_button_category';
+import 'package:test_app/widgets/custom_card_product.dart';
 import 'package:test_app/widgets/custom_card_shop_now.dart';
 import 'package:test_app/widgets/custom_image_view.dart';
 
@@ -22,9 +23,11 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Center(
+      body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        // physics: BouncingScrollPhysics(),
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -189,6 +192,28 @@ class _HomeState extends State<Home> {
                   ],
                 ),
               ),
+              ////////
+              SizedBox(
+                height: 300,
+                child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: _homeController.productList.length,
+                    itemBuilder: (context, index) {
+                      final category = _homeController.productList[index];
+                      bool isSelected =
+                          index == _homeController.selectedItemIndex.value;
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8.0),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: CustomCardProduct(
+                            imageUrl: category,
+                          ),
+                        ),
+                      );
+                    }),
+              ),
+              ////////
             ],
           ),
         ),
