@@ -1,12 +1,14 @@
 // constants.dart
 
+// ignore_for_file: constant_identifier_names
+
 class AppConstants {
   //Login Screen
   static const String name = "Hello Alex";
   static const String goodMorning = "Good Morning!";
-  static const String appSubtitle = "Accéder à votre compte";
-  static const String imagePath = 'assets/images/pizza.png';
-  static const String emailHintText = 'exemple@exemple.fr';
+  static const String categoryTitle = "Categories";
+  static const String seeAll = 'See All';
+  static const String popularProduct = 'Popular Product';
   static const String passwordHintText = '************';
   static const String forgotPasswordText = 'Mot de passe oublié?';
   static const String privacyPolicy =

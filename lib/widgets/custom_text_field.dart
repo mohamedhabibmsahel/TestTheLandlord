@@ -39,7 +39,7 @@ class CustomTextField extends StatefulWidget {
   final TextStyle? hintStyle;
 
   const CustomTextField({
-    Key? key,
+    super.key,
     this.suffixIcon,
     this.hintText,
     this.labelText,
@@ -70,7 +70,7 @@ class CustomTextField extends StatefulWidget {
     this.hintStyle,
     this.controller,
     this.textInputAction = TextInputAction.done,
-  }) : super(key: key);
+  });
 
   @override
   // ignore: no_logic_in_create_state
@@ -101,17 +101,22 @@ class CustomTextFieldState extends State<CustomTextField> {
                 FocusScope.of(context).requestFocus(FocusNode());
               },
               child: Container(
-                padding: EdgeInsets.only(top: widget.topPadding ?? Paddings.extraLarge),
+                padding: EdgeInsets.only(
+                    top: widget.topPadding ?? Paddings.extraLarge),
                 width: MediaQuery.of(context).size.width,
                 child: TextFormField(
                   maxLength: widget.maxLength,
                   onTapOutside: widget.onTapOutside,
                   inputFormatters: widget.inputFormatters,
-                  style: widget.textStyle ?? TextStyle(fontSize: widget.textFontSize, color: kGrey),
+                  style: widget.textStyle ??
+                      TextStyle(fontSize: widget.textFontSize, color: kGrey),
                   enabled: widget.enabled,
-                  textDirection: widget.textInputType == TextInputType.phone ? TextDirection.ltr : null,
+                  textDirection: widget.textInputType == TextInputType.phone
+                      ? TextDirection.ltr
+                      : null,
                   focusNode: widget.focusNode,
-                  textCapitalization: widget.textCapitalization ?? TextCapitalization.words,
+                  textCapitalization:
+                      widget.textCapitalization ?? TextCapitalization.words,
                   keyboardType: widget.textInputType,
                   textAlign: widget.textAlign ?? TextAlign.left,
                   autofocus: widget.autofocus,
@@ -128,24 +133,32 @@ class CustomTextFieldState extends State<CustomTextField> {
                     floatingLabelBehavior: FloatingLabelBehavior.always,
                     labelStyle: AppFonts.x15Regular.copyWith(color: kGrey),
                     enabledBorder: const OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(RadiusSize.extraLarge)),
+                      borderRadius: BorderRadius.all(
+                          Radius.circular(RadiusSize.extraLarge)),
                       borderSide: BorderSide(color: kWhite, width: 1),
                     ),
                     focusedBorder: const OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(RadiusSize.extraLarge)),
+                      borderRadius: BorderRadius.all(
+                          Radius.circular(RadiusSize.extraLarge)),
                       borderSide: BorderSide(color: kWhite, width: 1),
                     ),
-
                     contentPadding: const EdgeInsets.all(30),
                     labelText: widget.labelText,
                     alignLabelWithHint: true,
                     border: widget.outlinedBorder
-                        ? const OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(RadiusSize.circular)), borderSide: BorderSide(color: kGrey, width: 2))
+                        ? const OutlineInputBorder(
+                            borderRadius: BorderRadius.all(
+                                Radius.circular(RadiusSize.circular)),
+                            borderSide: BorderSide(color: kGrey, width: 2))
                         : null,
                     hintText: widget.hintText,
-                    hintStyle: widget.hintStyle ?? AppFonts.x14Regular.copyWith(color: kGrey.withAlpha(150)),
+                    hintStyle: widget.hintStyle ??
+                        AppFonts.x14Regular
+                            .copyWith(color: kGrey.withAlpha(150)),
                     prefixIcon: widget.prefixIcon,
-                    constraints: BoxConstraints(maxHeight: widget.height ?? double.infinity, maxWidth: widget.width ?? double.infinity),
+                    constraints: BoxConstraints(
+                        maxHeight: widget.height ?? double.infinity,
+                        maxWidth: widget.width ?? double.infinity),
                     suffixIcon: widget.suffixIcon ??
                         (widget.isPassword
                             ? InkWell(
@@ -156,12 +169,16 @@ class CustomTextFieldState extends State<CustomTextField> {
                                 },
                                 child: widget.height != null
                                     ? Icon(
-                                        _obscureText ? Icons.visibility_off : Icons.visibility,
+                                        _obscureText
+                                            ? Icons.visibility_off
+                                            : Icons.visibility,
                                         size: 30,
                                         color: kBlackColor,
                                       )
                                     : Icon(
-                                        _obscureText ? Icons.visibility_off : Icons.visibility,
+                                        _obscureText
+                                            ? Icons.visibility_off
+                                            : Icons.visibility,
                                         color: kBlackColor,
                                       ),
                               )

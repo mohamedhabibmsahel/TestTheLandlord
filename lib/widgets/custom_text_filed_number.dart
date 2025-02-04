@@ -9,13 +9,13 @@ class NumericSquareTextField extends StatefulWidget {
   final ValueChanged<String>? onChanged;
 
   const NumericSquareTextField({
-    Key? key,
+    super.key,
     this.controller,
     this.hintText,
     this.labelText,
     this.enabled = true,
     this.onChanged,
-  }) : super(key: key);
+  });
 
   @override
   NumericSquareTextFieldState createState() => NumericSquareTextFieldState();

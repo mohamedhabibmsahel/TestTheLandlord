@@ -1,0 +1,54 @@
+import 'package:flutter/material.dart';
+
+class CustomButtonCategory extends StatelessWidget {
+  final Color backgroundColor;
+  final Color titleColor;
+  final String title;
+  final VoidCallback onPressed;
+  final double radius;
+  final IconData? icon;
+
+  const CustomButtonCategory({
+    super.key,
+    required this.backgroundColor,
+    required this.titleColor,
+    this.title = "",
+    required this.onPressed,
+    this.radius = 20.0,
+    this.icon,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: onPressed,
+      style: ElevatedButton.styleFrom(
+        backgroundColor: backgroundColor,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(radius),
+        ),
+        padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0), // Add padding to create space around text
+      ),
+      child: icon != null
+          ? Row(
+              mainAxisSize: MainAxisSize.min, // This ensures the icon and text take only as much space as needed
+              children: [
+                Icon(
+                  icon,
+                  color: titleColor,
+                  size: 24.0,
+                ),
+                const SizedBox(width: 8.0), // Space between icon and text
+                Text(
+                  title,
+                  style: TextStyle(color: titleColor),
+                ),
+              ],
+            )
+          : Text(
+              title,
+              style: TextStyle(color: titleColor),
+            ),
+    );
+  }
+}

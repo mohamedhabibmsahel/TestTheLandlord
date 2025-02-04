@@ -13,61 +13,92 @@ class Helper {
   static RxBool blockRequest = false.obs;
   static RxBool isLoading = true.obs;
 
-  static void snackBar({String message = 'Snack bar test', String? title, Duration? duration, bool includeDismiss = true, Widget? overrideButton,TextStyle? styleMessage}) => GetSnackBar(
-    titleText: title != null ? Text(title, style: styleMessage ?? AppFonts.x12Regular.copyWith(color: kNeutralColor100) ) : null,
-    message: message,
-    duration: duration ?? const Duration(seconds: 3),
-    isDismissible: true,
-    margin: EdgeInsets.zero,
-    backgroundColor: kSecondaryColor,
-    snackPosition: SnackPosition.BOTTOM,
-    mainButton: overrideButton ?? (includeDismiss ? TextButton(onPressed: Get.back, child: const Text('Dismiss')) : null),
-  ).show();
+  static void snackBar(
+          {String message = 'Snack bar test',
+          String? title,
+          Duration? duration,
+          bool includeDismiss = true,
+          Widget? overrideButton,
+          TextStyle? styleMessage}) =>
+      GetSnackBar(
+        titleText: title != null
+            ? Text(title,
+                style: styleMessage ??
+                    AppFonts.x12Regular.copyWith(color: kNeutralColor100))
+            : null,
+        message: message,
+        duration: duration ?? const Duration(seconds: 3),
+        isDismissible: true,
+        margin: EdgeInsets.zero,
+        backgroundColor: kSecondaryColor,
+        snackPosition: SnackPosition.BOTTOM,
+        mainButton: overrideButton ??
+            (includeDismiss
+                ? TextButton(onPressed: Get.back, child: const Text('Dismiss'))
+                : null),
+      ).show();
 
-  static Future<void> waitAndExecute(bool Function() condition, Function callback, {Duration? duration}) async {
+  static Future<void> waitAndExecute(
+      bool Function() condition, Function callback,
+      {Duration? duration}) async {
     while (!condition()) {
-      await Future.delayed(duration ?? const Duration(milliseconds: 800), () {});
+      await Future.delayed(
+          duration ?? const Duration(milliseconds: 800), () {});
     }
     callback();
   }
 
   static bool isNullOrEmpty(String? value) => value == null || value.isEmpty;
 
-  static void onSearchDebounce(void Function() callback, {Duration duration = const Duration(milliseconds: 800)}) {
+  static void onSearchDebounce(void Function() callback,
+      {Duration duration = const Duration(milliseconds: 800)}) {
     if (_searchOnStoppedTyping != null) _searchOnStoppedTyping!.cancel();
     _searchOnStoppedTyping = Timer(duration, callback);
   }
 
-  static final bool isMobile = Get.width < 500 && (GetPlatform.isAndroid || GetPlatform.isIOS);
+  static final bool isMobile =
+      Get.width < 500 && (GetPlatform.isAndroid || GetPlatform.isIOS);
 
-  static bool isColorDarkEnoughForWhiteText(Color color, {double threshold = 0.55}) {
-    assert(threshold >= 0 && threshold <= 1, 'The threshold value should be between 0.0 and 1.0');
+  static bool isColorDarkEnoughForWhiteText(Color color,
+      {double threshold = 0.55}) {
+    assert(threshold >= 0 && threshold <= 1,
+        'The threshold value should be between 0.0 and 1.0');
     // Calculate the relative luminance of the color
-    final double luminance = (0.299 * color.red + 0.587 * color.green + 0.114 * color.blue) / 255;
+    final double luminance =
+        (0.299 * color.r + 0.587 * color.g + 0.114 * color.b) / 255;
     // Determine if the color is dark enough based on a threshold value
     return luminance > threshold;
   }
 
-  static Future<dynamic> openBottomSheet(Widget widget, {double? height, Widget? backgroundWidget}) async => await Get.bottomSheet(
-    Material(
-      color: backgroundWidget != null ? Colors.transparent : null,
-      child: backgroundWidget != null
-          ? Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          GestureDetector(onTap: Get.back, child: Container(color: Colors.transparent, height: Get.height - (height ?? 0), child: backgroundWidget)),
-          SizedBox(height: height, child: widget),
-        ],
-      )
-          : SizedBox(height: height, child: widget),
-    ),
-    isScrollControlled: true,
-    enableDrag: true,
-    enterBottomSheetDuration: const Duration(milliseconds: 300),
-    clipBehavior: Clip.hardEdge,
-    shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(RadiusSize.large))),
-    ignoreSafeArea: true,
-  );
+  static Future<dynamic> openBottomSheet(Widget widget,
+          {double? height, Widget? backgroundWidget}) async =>
+      await Get.bottomSheet(
+        Material(
+          color: backgroundWidget != null ? Colors.transparent : null,
+          child: backgroundWidget != null
+              ? Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    GestureDetector(
+                        onTap: Get.back,
+                        child: Container(
+                            color: Colors.transparent,
+                            height: Get.height - (height ?? 0),
+                            child: backgroundWidget)),
+                    SizedBox(height: height, child: widget),
+                  ],
+                )
+              : SizedBox(height: height, child: widget),
+        ),
+        isScrollControlled: true,
+        enableDrag: true,
+        enterBottomSheetDuration: const Duration(milliseconds: 300),
+        clipBehavior: Clip.hardEdge,
+        shape: const RoundedRectangleBorder(
+            borderRadius:
+                BorderRadius.vertical(top: Radius.circular(RadiusSize.large))),
+        ignoreSafeArea: true,
+      );
 
   static String getReadableLanguage(String languageCode) {
     switch (languageCode) {
@@ -81,13 +112,14 @@ class Helper {
         return 'German';
       case 'ar':
         return 'Arabic';
-    // Add more language codes and their readable names as needed
+      // Add more language codes and their readable names as needed
       default:
         return 'Unknown';
     }
   }
+
   static void pushScreen(String route, {dynamic args}) {
-    Get.toNamed(route,arguments: args);
+    Get.toNamed(route, arguments: args);
   }
   // static String getDayFullName(int day) => DateFormat('EEEE').format(DateTime(2023, 5, day));
   //
@@ -102,7 +134,8 @@ class Helper {
     EdgeInsets padding = EdgeInsets.zero,
   }) =>
       AlertDialog(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(radius))),
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(radius))),
         backgroundColor: backgroundColor,
         insetPadding: padding,
         contentPadding: padding,
@@ -116,6 +149,4 @@ class Helper {
           ),
         ),
       );
-
-
 }

@@ -5,10 +5,10 @@ import '../constant/colors.dart';
 class TimeProgressBar extends StatefulWidget {
   final Duration duration;
 
-  const TimeProgressBar({Key? key, required this.duration})
-      : super(key: key);
+  const TimeProgressBar({super.key, required this.duration});
 
   @override
+  // ignore: library_private_types_in_public_api
   _TimeBasedProgressWidgetState createState() =>
       _TimeBasedProgressWidgetState();
 }
@@ -43,8 +43,8 @@ class _TimeBasedProgressWidgetState extends State<TimeProgressBar>
       animation: _animationController,
       builder: (BuildContext context, Widget? child) {
         _elapsedTime = Duration(
-          milliseconds: (_animationController.value * _totalTime.inMilliseconds)
-              .floor(),
+          milliseconds:
+              (_animationController.value * _totalTime.inMilliseconds).floor(),
         );
         return LinearProgressIndicator(
           color: backButton,

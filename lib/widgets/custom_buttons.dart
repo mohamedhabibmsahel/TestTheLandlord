@@ -36,13 +36,11 @@ class CustomButton extends StatelessWidget {
           ),
         ),
         child: icon != null
-            ? Center(
-                child: Icon(
-                  icon,
-                  color: titleColor,
-                  size: 24.0,
-                  semanticLabel: title,
-                ),
+            ? Icon(
+                icon,
+                color: titleColor,
+                size: 24.0,
+                semanticLabel: title,
               )
             : Text(
                 title,

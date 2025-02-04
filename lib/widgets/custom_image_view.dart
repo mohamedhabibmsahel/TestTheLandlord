@@ -24,6 +24,7 @@ class CustomImageView extends StatelessWidget {
   ///a [CustomImageView] it can be used for showing any type of images
   /// it will shows the placeholder image if image is not found on network image
   CustomImageView({
+    super.key,
     this.imagePath,
     this.height,
     this.width,
@@ -41,9 +42,9 @@ class CustomImageView extends StatelessWidget {
   Widget build(BuildContext context) {
     return alignment != null
         ? Align(
-      alignment: alignment!,
-      child: _buildWidget(),
-    )
+            alignment: alignment!,
+            child: _buildWidget(),
+          )
         : _buildWidget();
   }
 
@@ -72,12 +73,14 @@ class CustomImageView extends StatelessWidget {
   ///build the image with border and border radius style
   _buildImageWithBorder() {
     if (border != null) {
-      return Container(
+      return DecoratedBox(
         decoration: BoxDecoration(
           border: border,
           borderRadius: radius,
         ),
-        child: _buildImageView(),
+        child: SizedBox(
+          child: _buildImageView(),
+        ),
       );
     } else {
       return _buildImageView();
@@ -88,7 +91,7 @@ class CustomImageView extends StatelessWidget {
     if (imagePath != null) {
       switch (imagePath!.imageType) {
         case ImageType.svg:
-          return Container(
+          return SizedBox(
             height: height,
             width: width,
             child: SvgPicture.asset(
@@ -114,7 +117,7 @@ class CustomImageView extends StatelessWidget {
             fit: fit,
             imageUrl: imagePath!,
             color: color,
-            placeholder: (context, url) => Container(
+            placeholder: (context, url) => SizedBox(
               height: 30,
               width: 30,
               child: LinearProgressIndicator(
@@ -146,11 +149,11 @@ class CustomImageView extends StatelessWidget {
 
 extension ImageTypeExtension on String {
   ImageType get imageType {
-    if (this.startsWith('http') || this.startsWith('https')) {
+    if (startsWith('http') || startsWith('https')) {
       return ImageType.network;
-    } else if (this.endsWith('.svg')) {
+    } else if (endsWith('.svg')) {
       return ImageType.svg;
-    } else if (this.startsWith('file://')) {
+    } else if (startsWith('file://')) {
       return ImageType.file;
     } else {
       return ImageType.png;

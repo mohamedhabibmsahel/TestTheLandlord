@@ -3,11 +3,21 @@ import 'package:get/get.dart';
 import 'package:standard_searchbar/old/standard_searchbar.dart';
 import 'package:test_app/constant/app_fonts.dart';
 import 'package:test_app/constant/constants.dart';
-import 'package:test_app/widgets/custom_button_icon.dart';
-import 'package:test_app/widgets/custom_buttons.dart';
+import 'package:test_app/home_controller.dart';
+import 'package:test_app/widgets/custom_button_category';
+import 'package:test_app/widgets/custom_card_shop_now.dart';
 import 'package:test_app/widgets/custom_image_view.dart';
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
+  const Home({super.key});
+
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  final HomeController _homeController = Get.put(HomeController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -102,6 +112,79 @@ class Home extends StatelessWidget {
                           color: Colors.black, // Icon color
                         ),
                       ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 8),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(4.0),
+                      child: Text(AppConstants.categoryTitle,
+                          style: AppFonts.x20Bold),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(4.0),
+                      child:
+                          Text(AppConstants.seeAll, style: AppFonts.x12Regular),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 100,
+                child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: _homeController.categoriesList.length,
+                    itemBuilder: (context, index) {
+                      final category = _homeController.categoriesList[index];
+                      bool isSelected =
+                          index == _homeController.selectedItemIndex.value;
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8.0),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: CustomButtonCategory(
+                            title: category,
+                            backgroundColor: isSelected
+                                ? Colors.orange
+                                : Color.fromARGB(255, 239, 239, 239),
+                            titleColor:
+                                isSelected ? Colors.white : Colors.black,
+                            onPressed: () {
+                              _homeController.selectedItemIndex.value = index;
+                            },
+                          ),
+                        ),
+                      );
+                    }),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8),
+                child: ShopCard(
+                  imageUrl: 'assets/images/pilotes/2.jpeg',
+                  height: 250,
+                  title: 'Shop Now',
+                  text: 'Special Sale',
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 8),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(4.0),
+                      child: Text(AppConstants.popularProduct,
+                          style: AppFonts.x20Bold),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(4.0),
+                      child:
+                          Text(AppConstants.seeAll, style: AppFonts.x12Regular),
                     ),
                   ],
                 ),
