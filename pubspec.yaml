@@ -40,6 +40,7 @@ dependencies:
   validators: ^3.0.0
   flutter_svg: ^1.1.6
   cached_network_image: ^3.2.1
+  standard_searchbar: ^2.0.0
 
 dev_dependencies:
   flutter_test:

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:standard_searchbar/old/standard_searchbar.dart';
 import 'package:test_app/constant/app_fonts.dart';
 import 'package:test_app/constant/constants.dart';
 import 'package:test_app/widgets/custom_button_icon.dart';
@@ -78,6 +79,33 @@ class Home extends StatelessWidget {
                   ),
                 )
               ]),
+              Padding(
+                padding: const EdgeInsets.only(top: 16),
+                child: Row(
+                  children: [
+                    StandardSearchBar(
+                      backgroundColor: const Color.fromARGB(255, 239, 239, 239),
+                      width: 310,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: const Color.fromARGB(
+                              255, 239, 239, 239), // Background color
+                          borderRadius: BorderRadius.circular(
+                              12), // Rounded corners with a radius
+                        ),
+                        child: IconButton(
+                          onPressed: () {},
+                          icon: Icon(Icons.tune_outlined),
+                          color: Colors.black, // Icon color
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ],
           ),
         ),
